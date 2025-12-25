@@ -61,6 +61,10 @@ class EcoRideMain:
       print()
       vehicle.maintainance_status = maintainance_status
       vehicle.rental_price = rental_price
+      duplicate = [v for v in self.vehicles if v == vehicle]
+      if duplicate:
+        print(f"Duplicate vehicle ID '{vehicle.vehicle_id}' not allowed!")
+        return
       self.vehicles.append(vehicle)
       self.fleet_hubs[hub_name].append(vehicle_id)
 
@@ -86,3 +90,6 @@ while True:
         print(vehicle.__dict__)
         print() 
     case 8: break
+    case _: 
+      print("Invalid choice!")
+      break
