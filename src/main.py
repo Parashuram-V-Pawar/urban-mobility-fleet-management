@@ -39,13 +39,13 @@ class EcoRideMain:
     no_of_vehicles = int(input("Enter number of vehicles to add: \n"))
     for i in range(no_of_vehicles):
       print(f"Enter details for {i+1} vehicle")
+      vehicle_type = input("Enter type of vehicle (car/scooter): ").lower()
       vehicle_id = input("Enter vehicle id: ")
       model = input("Enter vehicle model: ")
       battery_percentage = int(input("Enter available battery percentage: "))
       maintainance_status = input("Enter maintainance status(Available/ On Trip/ Under Maintainance): ")
       rental_price = int(input("Enter Rental price of the vehicle: "))
 
-      vehicle_type = input("Enter type of vehicle (car/scooter): ").lower()
       if vehicle_type == "car" :
         seating_capacity = int(input("Enter number of seats: "))
         vehicle = ElectricCar(vehicle_id, model, battery_percentage, seating_capacity)
@@ -75,7 +75,7 @@ eco = EcoRideMain()
 eco.greet()
 while True:
   print()
-  print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n8. Exit")
+  print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n8. Exit")
   choice = int(input())
   match choice:
     case 1:
@@ -89,6 +89,10 @@ while True:
       for vehicle in eco.vehicles:
         print(vehicle.__dict__)
         print() 
+    case 5:
+      veh_battery = list(filter(lambda vehicle: vehicle.battery_percentage > 80 , eco.vehicles))
+      for v in veh_battery:
+        print(f"{v.vehicle_id} | {v.model} | {v.battery_percentage}")
     case 8: break
     case _: 
       print("Invalid choice!")
