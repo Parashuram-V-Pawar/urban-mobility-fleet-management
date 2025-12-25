@@ -6,8 +6,12 @@ class ElectricScooter(Vehicle):
     super().__init__(vehicle_id, model, battery_percentage)
     self. max_speed_limit =  max_speed_limit
 
-scooter = ElectricScooter("SCO9876WE23","Simple One",67,120)
-# scooter.maintainance_status = "Service done"
-# scooter.rental_price = 80
+  def calculate_trip_cost(self, distance):
+    # $1.00 base + $0.15 per minute
+    return 1 + (0.15 * distance)
 
-print(scooter.__dict__)
+# scooter = ElectricScooter("SCO9876WE23","Simple One",67,120)
+# # scooter.maintainance_status = "Service done"
+# # scooter.rental_price = 80
+
+# print(scooter.__dict__)

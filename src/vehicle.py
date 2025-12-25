@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Vehicle(abstractmethod):
+class Vehicle(ABC):
   def __init__(self, vehicle_id, model, battery_percentage):
     self.vehicle_id = vehicle_id
     self.model = model
@@ -50,16 +50,16 @@ class Vehicle(abstractmethod):
 
 
 # initialize class object and assign values
-vehicle_id = "MEXB24CW2NT013567"
-model = "XUV 700"
-battery_percentage = 79
-veh = Vehicle(vehicle_id,model,battery_percentage)
+# vehicle_id = "MEXB24CW2NT013567"
+# model = "XUV 700"
+# battery_percentage = 79
+# veh = Vehicle(vehicle_id,model,battery_percentage)
 
-print(f"Model: {veh.model}")
-print(f"Vehicle ID: {veh.vehicle_id}")
-print(f"Battery Percentage: {veh.battery_percentage}")
-veh.maintainance_status = "Pending"
-print(f"Maintainance Status: {veh.maintainance_status}")
+# print(f"Model: {veh.model}")
+# print(f"Vehicle ID: {veh.vehicle_id}")
+# print(f"Battery Percentage: {veh.battery_percentage}")
+# veh.maintainance_status = "Pending"
+# print(f"Maintainance Status: {veh.maintainance_status}")
 
-veh.rental_price = 100
-print(f"Rental price: {veh.rental_price}")
+# veh.rental_price = 100
+# print(f"Rental price: {veh.rental_price}")
