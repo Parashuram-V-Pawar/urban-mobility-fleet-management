@@ -270,7 +270,7 @@ class EcoRideMain:
           else:
             vehicle_type = "Scooter"
             extra = vehicle.max_speed_limit
-        writer.writerow([hub, vehicle.vehicle_id, vehicle.model, vehicle.battery_percentage,vehicle.maintainance_status, vehicle.rental_price, vehicle_type, extra])
+          writer.writerow([hub, vehicle.vehicle_id, vehicle.model, vehicle.battery_percentage,vehicle.maintainance_status, vehicle.rental_price, vehicle_type, extra])
     print(f"Fleet data saved to CSV successfully.")
 
 
@@ -418,5 +418,5 @@ if __name__ == "__main__":
   eco.load_from_csv("data/fleet_data.csv")
   eco.load_from_json("data/fleet_data.json")
   eco.main()
-  eco.save_to_csv("data/fleet_data.json")
+  eco.save_to_csv("data/fleet_data.csv")
   eco.save_to_json("data/fleet_data.json")

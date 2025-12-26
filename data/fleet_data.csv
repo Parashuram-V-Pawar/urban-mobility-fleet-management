@@ -1,5 +1,10 @@
 hub_name,vehicle_id,model,battery_percentage,maintainance_status,rental_price,vehicle_type,extra
 Bangalore,2001,Tesla Model 3,90,available,500,Car,5
+Bangalore,2002,Creta,78,On Trip,600,Car,5
+Bangalore,2003,Activa,99,available,230,Scooter,120
+Bangalore,2004,Access 125,80,under maintainance,180,Scooter,115
 Hubli,1902,Ola S1 Pro,60,under maintainance,160,Scooter,90
+Hubli,1901,Lamborgini,98,available,1300,Car,2
+Hubli,1903,R15 V4,88,on trip,350,Scooter,155
 Mysore,3404,MG ZS EV,95,available,550,Car,5
 Davangere,9190,Access 125,88,available,180,Scooter,120
