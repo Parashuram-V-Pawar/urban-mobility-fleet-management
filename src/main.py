@@ -69,13 +69,32 @@ class EcoRideMain:
       self.fleet_hubs[hub_name].append(vehicle_id)
 
 
+  def view_vehicle_by_vehicle_type(self):
+    self.vehicle_category = {
+      "Cars":[],
+      "Scooters":[]
+    }
+
+    for vehicle in self.vehicles:
+      if isinstance(vehicle, ElectricCar):
+        self.vehicle_category["Cars"].append(vehicle)
+      elif isinstance(vehicle, ElectricScooter):
+        self.vehicle_category["Scooters"].append(vehicle)
+    
+    for vehicle_type, vehicle_list in self.vehicle_category.items():
+      print(f"\n{vehicle_type} : ")
+      if not vehicle_list:
+        print("No vehicles in list")
+      for v in vehicle_list:
+        print(f"{v}")
+
 
 ## Implementation of function calling and object creating
 eco = EcoRideMain()
 eco.greet()
 while True:
   print()
-  print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n8. Exit")
+  print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n8. Exit")
   choice = int(input())
   match choice:
     case 1:
@@ -93,6 +112,8 @@ while True:
       veh_battery = list(filter(lambda vehicle: vehicle.battery_percentage > 80 , eco.vehicles))
       for v in veh_battery:
         print(f"{v.vehicle_id} | {v.model} | {v.battery_percentage}")
+    case 6:
+      eco.view_vehicle_by_vehicle_type()
     case 8: break
     case _: 
       print("Invalid choice!")
