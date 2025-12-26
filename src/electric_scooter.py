@@ -9,6 +9,9 @@ class ElectricScooter(Vehicle):
   def calculate_trip_cost(self, distance):
     # $1.00 base + $0.15 per minute
     return 1 + (0.15 * distance)
+  
+  def __str__(self):
+    return (f"{super().__str__()}\nMaximum Speed Limit: {self.max_speed_limit}\n")
 
 # scooter = ElectricScooter("SCO9876WE23","Simple One",67,120)
 # # scooter.maintainance_status = "Service done"

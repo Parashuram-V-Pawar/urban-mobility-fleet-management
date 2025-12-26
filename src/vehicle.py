@@ -48,6 +48,9 @@ class Vehicle(ABC):
 
   def __eq__(self,other):
     return self.vehicle_id == other.vehicle_id
+  
+  def __str__(self):
+    return (f"Vehicle Id: {self.vehicle_id}\nModel: {self.model}\nBattery Percentage: {self.battery_percentage}\nMaintainance Status: {self.__maintainance_status}\nRental Price: {self.__rental_price}")
 
 
 # initialize class object and assign values

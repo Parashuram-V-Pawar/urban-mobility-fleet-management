@@ -14,7 +14,7 @@ class EcoRideMain:
   def main(self):
     while True:
       print()
-      print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Exit")
+      print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Sort vehicles\n9. Exit")
       choice = int(input())
       match choice:
         case 1:
@@ -36,10 +36,17 @@ class EcoRideMain:
           eco.view_vehicle_by_vehicle_type()
         case 7:
           eco.vehicle_maintainance_status()
-        case 8: break
+        case 8:
+          hub_name = input("Enter hub name to sort vehicles: ")
+          eco.vehicle_sorting(hub_name)
+        case 9: break
         case _: 
           print("Invalid choice!")
           break
+
+
+
+
   # Function to add hub.
   def add_hub(self):
     hub_name = input("Enter hub name: ")
@@ -93,6 +100,7 @@ class EcoRideMain:
       self.fleet_hubs[hub_name].append(vehicle_id)
 
 
+  # Function to display vehicle by its type.
   def view_vehicle_by_vehicle_type(self):
     self.vehicle_category = {
       "Cars":[],
@@ -113,6 +121,7 @@ class EcoRideMain:
         print(f"{v}")
 
 
+  # Function to display vehicle maintainance status
   def vehicle_maintainance_status(self):
     available = 0
     on_trip = 0
@@ -128,10 +137,27 @@ class EcoRideMain:
         under_maintainance += 1
 
     print("\n\nMaintainance Status: ")
-    print("-----------------------------------------")
+    print("------------------------------------------------")
     print(f"Available: {available}")
     print(f"On trip: {on_trip}")
     print(f"Under Maintainance: {under_maintainance}")
+
+
+  # Function to sort vehicle by name
+  def vehicle_sorting(self, hub_name):
+    if hub_name not in self.fleet_hubs:
+      return
+    hub_vehicles = [
+      v for v in self.vehicles if v.vehicle_id in self.fleet_hubs[hub_name]
+    ]
+    hub_vehicles.sort(key=lambda v: v.model.lower())
+    if not hub_vehicles:
+      print("No vehicles in hub.")
+      return
+    print(f"\n\nVehicles in '{hub_name}' (sorted by model):")
+    print("-------------------------------------------------")
+    for vehicle in hub_vehicles:
+        print(f"\n{vehicle}")
 
 ## Implementation of function calling and object creating
 eco = EcoRideMain()
