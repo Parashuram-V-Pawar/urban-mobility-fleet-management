@@ -3,17 +3,38 @@ import json
 from electric_car import ElectricCar
 from electric_scooter import ElectricScooter
 
-# Main class
+# Main controller class
 class EcoRideMain:
+  '''
+    Main controller class for the EcoRide Urban Mobility System.
+
+    This class manages fleet hubs and electric vehicles, it gives menu-driven operations such as adding hubs, managing vehicles, displaying fleet information, and handling data persistence.
+
+    Attributes:
+        fleet_hubs (dict): Stores hub names as keys and lists of vehicles assigned to each hub as values.
+        vehicles (list): Stores all vehicle objects managed by the system.
+  '''
   # Empty dictionary to store hubs and vehicles
   fleet_hubs = dict()
   # Empty list to store the vehicle details
   vehicles = []
   # Function desplays a welcome message
   def greet(self):
+    '''
+    Displays a welcome message for the EcoRide Urban Mobility System.
+
+    Returns: None
+    '''
     print("\nWelcome to Eco-Ride Urban Mobility System")
 
   def main(self):
+    '''
+    Acts as the main control loop for the EcoRide Urban Mobility System.
+
+    This method continuously displays the menu, accepts user input, and routes the control flow to the appropriate hub and vehicle management functions until the user exits the application.
+
+    Returns: None
+    '''
     while True:
       print()
       print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Sort vehicles\n9. Sort by\n10. Exit")
@@ -24,8 +45,8 @@ class EcoRideMain:
         case 2:
           eco.add_vehicles()
         case 3:
-          for hub in eco.fleet_hubs.items():
-            print(hub)
+          for hub, vehicle_list in eco.fleet_hubs.items():
+            print(f"{hub} : {vehicle_list}")
         case 4:
           for vehicle in eco.vehicles:
             print(vehicle)
@@ -54,6 +75,13 @@ class EcoRideMain:
 
   # Function to add hub.
   def add_hub(self):
+    '''
+    Function to add hub to the fleet_hubs
+
+    This method prompts user to add hub name, if the hub already exist in the fleet_hubs, a message is displayed else, the hub will be added to the fleet with empty list
+    
+    Returns: None
+    '''
     hub_name = input("Enter hub name: ")
     if hub_name in self.fleet_hubs:
       print(f"Hub {hub_name} already present.")
@@ -67,6 +95,14 @@ class EcoRideMain:
 
   # Function to take vehicles inputs.
   def add_vehicles(self):
+    '''
+    Function to add vehicles
+
+    This method allows the user to enter multiple vehicle details (such as vehicle ID, model, and type) and assigns them to an existing hub in the fleet.
+
+    Returns: None
+    
+    '''
     hub_name = input("Enter hub name to add vehicles: ")
     if hub_name not in self.fleet_hubs:
       print(f"Hub {hub_name} is not present. Please add Hub first")
@@ -106,6 +142,14 @@ class EcoRideMain:
 
   # Function to display vehicle by its type.
   def view_vehicle_by_vehicle_type(self):
+    '''
+    Method to display vehicle grouped by its vehicle type
+
+    THis method displays all vehicles with group of that type across all hubs in the fleet.
+
+    Returns: None
+    
+    '''
     self.vehicle_category = {
       "Cars":[],
       "Scooters":[]
@@ -128,6 +172,14 @@ class EcoRideMain:
 
   # Function to display vehicle maintainance status
   def vehicle_maintainance_status(self):
+    '''
+    Function to count vehicles in reference to maintainance status.
+
+    This method counts the vehicles based on its maintainance status and displays status wise numbers
+
+    Returns: None
+
+    '''
     available = 0
     on_trip = 0
     under_maintainance = 0
@@ -149,7 +201,13 @@ class EcoRideMain:
 
 
   # Function to sort vehicle by name
-  def vehicle_sorting(self, hub_name):
+  def vehicle_sorting(self, hub_name: str):
+    '''
+    Function to sort vehicle results based on the model number in specified hub.
+    
+    :param hub_name: Hub name from which we need to sort the results based on the model number.
+
+    '''
     if hub_name not in self.fleet_hubs:
       return
     hub_vehicles = [
@@ -165,7 +223,12 @@ class EcoRideMain:
         print(f"\n{vehicle}")
 
   # Sorting dynamically by battery or rental_price
-  def advanced_sorting(self, sort_by):
+  def advanced_sorting(self, sort_by: str):
+    '''
+    Function to sort the result based on the user input
+    
+    :param sort_by: Input received from the user based on what the sorting is to be performed
+    '''
     if sort_by.lower() == "battery":
         sorted_vehicles = sorted(
             self.vehicles,
@@ -186,7 +249,13 @@ class EcoRideMain:
         print(f"\n{v}")
 
   # Function to write to csv
-  def save_to_csv(self, filename="data/fleet_data.csv"):
+  def save_to_csv(self, filename: str):
+    '''
+    Function to save the data to the CSV file
+    
+    :param filename: filename where the data is to be saved for later use
+
+    '''
     import csv
     with open(filename, mode="w", newline="") as file:
       writer = csv.writer(file)
@@ -206,7 +275,13 @@ class EcoRideMain:
 
 
   # Function to load data from CSV file
-  def load_from_csv(self, filename):
+  def load_from_csv(self, filename: str):
+    '''
+    Function to load data from the CSV file
+    
+    :param filename: filename from where the data is to be loaded.
+
+    '''
     try:
       with open(filename, mode="r", newline='') as file:
         reader = csv.DictReader(file)
@@ -250,7 +325,13 @@ class EcoRideMain:
       print(f"Error loading CSV: {e}")
 
   # Function to load data from JSON
-  def load_from_json(self, filename):
+  def load_from_json(self, filename: str):
+    '''
+    This function loads information from the json file to the program
+    
+    :param filename: filename from where the data is to be loaded
+
+    '''
     try:
       with open(filename, "r") as f:
         fleet_data = json.load(f)
@@ -286,7 +367,13 @@ class EcoRideMain:
 
 
   # Function to save data to JSON
-  def save_to_json(self, filename):
+  def save_to_json(self, filename: str):
+    '''
+    Function to store hub and vehicle information to JSON
+    
+    :param filename: takes filename as input where the data needs to be saved
+
+    '''
     fleet_data = {}
     for hub, vehicle_ids in self.fleet_hubs.items():
       fleet_data[hub] = []
@@ -300,10 +387,11 @@ class EcoRideMain:
 
   # Function to convert vehicle data to dictionary
   def vehicle_to_dict(self, vehicle):
-    """
-    Convert ElectricCar or ElectricScooter object to dictionary for JSON.
+    '''
+    Function to convert vehicle information to dictionary to save in JSON
     
-    """
+    :param vehicle: It is a single vehicle object to be converted into dict
+    '''
     data = {
       "vehicle_id": vehicle.vehicle_id,
       "model": vehicle.model,

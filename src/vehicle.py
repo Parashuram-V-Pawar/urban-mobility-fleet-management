@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Vehicle(ABC):
-  def __init__(self, vehicle_id, model, battery_percentage):
+  def __init__(self, vehicle_id: str, model: str, battery_percentage: int):
     self.vehicle_id = vehicle_id
     self.model = model
     self.battery_percentage = battery_percentage
@@ -52,19 +52,3 @@ class Vehicle(ABC):
   
   def __str__(self):
     return (f"Vehicle Id: {self.vehicle_id}\nModel: {self.model}\nBattery Percentage: {self.battery_percentage}\nMaintainance Status: {self.maintainance_status}\nRental Price: {self.rental_price}")
-
-
-# initialize class object and assign values
-# vehicle_id = "MEXB24CW2NT013567"
-# model = "XUV 700"
-# battery_percentage = 79
-# veh = Vehicle(vehicle_id,model,battery_percentage)
-
-# print(f"Model: {veh.model}")
-# print(f"Vehicle ID: {veh.vehicle_id}")
-# print(f"Battery Percentage: {veh.battery_percentage}")
-# veh.maintainance_status = "Pending"
-# print(f"Maintainance Status: {veh.maintainance_status}")
-
-# veh.rental_price = 100
-# print(f"Rental price: {veh.rental_price}")

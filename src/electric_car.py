@@ -2,7 +2,7 @@ from vehicle import Vehicle
 
 class ElectricCar(Vehicle):
   
-  def __init__(self, vehicle_id, model, battery_percentage, seating_capacity):
+  def __init__(self, vehicle_id: str, model: str, battery_percentage: int, seating_capacity: int):
     super().__init__(vehicle_id, model, battery_percentage)
     self.seating_capacity = seating_capacity
 
@@ -12,8 +12,3 @@ class ElectricCar(Vehicle):
   
   def __str__(self):
     return (f"{super().__str__()}\nSeating Capacity: {self.seating_capacity}\n")
-# car = ElectricCar("MDC09876XD","XUV 3X0",100,5)
-# # car.maintainance_status = "Service done"
-# # car.rental_price = 80
-
-# print(car.__dict__)
