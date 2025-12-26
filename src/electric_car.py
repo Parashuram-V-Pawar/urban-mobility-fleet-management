@@ -11,7 +11,7 @@ class ElectricCar(Vehicle):
     return 5.00 + (0.5 * distance)
   
   def __str__(self):
-    return (f"{super().__str__()}\nSeating Capacity: {self.seating_capacity}")
+    return (f"{super().__str__()}\nSeating Capacity: {self.seating_capacity}\n")
 # car = ElectricCar("MDC09876XD","XUV 3X0",100,5)
 # # car.maintainance_status = "Service done"
 # # car.rental_price = 80

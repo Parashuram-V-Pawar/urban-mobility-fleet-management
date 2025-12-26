@@ -42,6 +42,7 @@ class Vehicle(ABC):
   rental_price = property(get_rental_price, set_rental_price)
 
 
+  # Abstract method to calculate trip cost
   @abstractmethod 
   def calculate_trip_cost(self, distance):
     pass
