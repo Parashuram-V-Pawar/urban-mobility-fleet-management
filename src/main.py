@@ -1,3 +1,4 @@
+import csv
 from electric_car import ElectricCar
 from electric_scooter import ElectricScooter
 
@@ -26,7 +27,7 @@ class EcoRideMain:
             print(hub)
         case 4:
           for vehicle in eco.vehicles:
-            print(vehicle.__dict__)
+            print(vehicle)
             print() 
         case 5:
           veh_battery = list(filter(lambda vehicle: vehicle.battery_percentage > 80 , eco.vehicles))
@@ -183,9 +184,76 @@ class EcoRideMain:
     for v in sorted_vehicles:
         print(f"\n{v}")
 
+  # Function to write to csv
+  def save_to_csv(self, filename="data/fleet_data.csv"):
+    import csv
+    with open(filename, mode="w", newline="") as file:
+      writer = csv.writer(file)
+      writer.writerow(["hub_name","vehicle_id","model","battery_percentage","maintainance_status","rental_price","vehicle_type","extra"])
+
+      for hub, vehicle_ids in self.fleet_hubs.items():
+        for vid in vehicle_ids:
+          vehicle = next(v for v in self.vehicles if v.vehicle_id == vid)
+          if vehicle.__class__.__name__ == "ElectricCar":
+            vehicle_type = "Car"
+            extra = vehicle.seating_capacity
+          else:
+            vehicle_type = "Scooter"
+            extra = vehicle.max_speed_limit
+        writer.writerow([hub, vehicle.vehicle_id, vehicle.model, vehicle.battery_percentage,vehicle.maintainance_status, vehicle.rental_price, vehicle_type, extra])
+
+
+  # Function to load data from CSV file
+  def load_from_csv(self, filename):
+    try:
+        with open(filename, mode="r", newline='') as file:
+            reader = csv.DictReader(file)
+            self.vehicles.clear()
+            self.fleet_hubs.clear()
+
+            for row in reader:
+                hub_name = row["hub_name"]
+                vehicle_id = row["vehicle_id"]
+                model = row["model"]
+                battery = int(row["battery_percentage"])
+                status = row["maintainance_status"]  # Fixed typo
+                price = int(row["rental_price"])
+                vehicle_type = row["vehicle_type"].lower()
+                extra = int(row["extra"])
+
+                if vehicle_type == "car":
+                    vehicle = ElectricCar(vehicle_id, model, battery, extra)
+                elif vehicle_type == "scooter":
+                    vehicle = ElectricScooter(vehicle_id, model, battery, extra)
+                else:
+                    print(f"Unknown vehicle type '{vehicle_type}' in CSV. Skipping...")
+                    continue
+
+                vehicle.maintainance_status = status
+                vehicle.rental_price = price
+
+                self.vehicles.append(vehicle)
+
+                # Add vehicle ID to hub dictionary
+                if hub_name not in self.fleet_hubs:
+                    self.fleet_hubs[hub_name] = []
+                self.fleet_hubs[hub_name].append(vehicle_id)
+
+        print("Fleet data loaded from CSV successfully.")
+
+    except FileNotFoundError:
+        print("CSV file not found. Starting with empty fleet.")
+    except KeyError as e:
+        print(f"Missing expected column in CSV: {e}")
+    except Exception as e:
+        print(f"Error loading CSV: {e}")
+
+
 ## Implementation of function calling and object creating
 eco = EcoRideMain()
 eco.greet()
 
 if __name__ == "__main__":
+  eco.load_from_csv("data/fleet_data.csv")
   eco.main()
+  eco.save_to_csv()
