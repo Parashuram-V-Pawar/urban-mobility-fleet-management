@@ -3,19 +3,43 @@ from electric_scooter import ElectricScooter
 
 # Main class
 class EcoRideMain:
-
   # Empty dictionary to store hubs and vehicles
   fleet_hubs = dict()
-
   # Empty list to store the vehicle details
   vehicles = []
-
   # Function desplays a welcome message
   def greet(self):
     print("\nWelcome to Eco-Ride Urban Mobility System")
 
-
-
+  def main(self):
+    while True:
+      print()
+      print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Exit")
+      choice = int(input())
+      match choice:
+        case 1:
+          eco.add_hub()
+        case 2:
+          eco.add_vehicles()
+        case 3:
+          for hub in eco.fleet_hubs.items():
+            print(hub)
+        case 4:
+          for vehicle in eco.vehicles:
+            print(vehicle.__dict__)
+            print() 
+        case 5:
+          veh_battery = list(filter(lambda vehicle: vehicle.battery_percentage > 80 , eco.vehicles))
+          for v in veh_battery:
+            print(f"{v.vehicle_id} | {v.model} | {v.battery_percentage}")
+        case 6:
+          eco.view_vehicle_by_vehicle_type()
+        case 7:
+          eco.vehicle_maintainance_status()
+        case 8: break
+        case _: 
+          print("Invalid choice!")
+          break
   # Function to add hub.
   def add_hub(self):
     hub_name = input("Enter hub name: ")
@@ -89,32 +113,29 @@ class EcoRideMain:
         print(f"{v}")
 
 
+  def vehicle_maintainance_status(self):
+    available = 0
+    on_trip = 0
+    under_maintainance = 0
+    for vehicle in self.vehicles:
+      status = vehicle.maintainance_status.lower()
+
+      if status == "available":
+        available += 1
+      elif status == "on trip":
+        on_trip += 1
+      elif status == "under maintainance":
+        under_maintainance += 1
+
+    print("\n\nMaintainance Status: ")
+    print("-----------------------------------------")
+    print(f"Available: {available}")
+    print(f"On trip: {on_trip}")
+    print(f"Under Maintainance: {under_maintainance}")
+
 ## Implementation of function calling and object creating
 eco = EcoRideMain()
 eco.greet()
-while True:
-  print()
-  print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n8. Exit")
-  choice = int(input())
-  match choice:
-    case 1:
-      eco.add_hub()
-    case 2:
-      eco.add_vehicles()
-    case 3:
-      for hub in eco.fleet_hubs.items():
-        print(hub)
-    case 4:
-      for vehicle in eco.vehicles:
-        print(vehicle.__dict__)
-        print() 
-    case 5:
-      veh_battery = list(filter(lambda vehicle: vehicle.battery_percentage > 80 , eco.vehicles))
-      for v in veh_battery:
-        print(f"{v.vehicle_id} | {v.model} | {v.battery_percentage}")
-    case 6:
-      eco.view_vehicle_by_vehicle_type()
-    case 8: break
-    case _: 
-      print("Invalid choice!")
-      break
+
+if __name__ == "__main__":
+  eco.main()
