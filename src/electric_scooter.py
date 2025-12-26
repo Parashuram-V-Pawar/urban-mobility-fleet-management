@@ -2,7 +2,7 @@ from vehicle import Vehicle
 
 class ElectricScooter(Vehicle):
   
-  def __init__(self, vehicle_id, model, battery_percentage,  max_speed_limit):
+  def __init__(self, vehicle_id: str, model: str, battery_percentage: int,  max_speed_limit: int):
     super().__init__(vehicle_id, model, battery_percentage)
     self. max_speed_limit =  max_speed_limit
 
@@ -12,9 +12,3 @@ class ElectricScooter(Vehicle):
   
   def __str__(self):
     return (f"{super().__str__()}\nMaximum Speed Limit: {self.max_speed_limit}\n")
-
-# scooter = ElectricScooter("SCO9876WE23","Simple One",67,120)
-# # scooter.maintainance_status = "Service done"
-# # scooter.rental_price = 80
-
-# print(scooter.__dict__)

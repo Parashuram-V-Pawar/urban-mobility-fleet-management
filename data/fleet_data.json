@@ -1,0 +1,91 @@
+{
+    "Bangalore": [
+        {
+            "vehicle_id": "2001",
+            "model": "Tesla Model 3",
+            "battery_percentage": 90,
+            "maintainance_status": "available",
+            "rental_price": 500,
+            "vehicle_type": "ElectricCar",
+            "extra": 5
+        },
+        {
+            "vehicle_id": "2002",
+            "model": "Creta",
+            "battery_percentage": 78,
+            "maintainance_status": "On Trip",
+            "rental_price": 600,
+            "vehicle_type": "ElectricCar",
+            "extra": 5
+        },
+        {
+            "vehicle_id": "2003",
+            "model": "Activa",
+            "battery_percentage": 99,
+            "maintainance_status": "available",
+            "rental_price": 230,
+            "vehicle_type": "ElectricScooter",
+            "extra": 120
+        },
+        {
+            "vehicle_id": "2004",
+            "model": "Access 125",
+            "battery_percentage": 80,
+            "maintainance_status": "under maintainance",
+            "rental_price": 180,
+            "vehicle_type": "ElectricScooter",
+            "extra": 115
+        }
+    ],
+    "Hubli": [
+        {
+            "vehicle_id": "1902",
+            "model": "Ola S1 Pro",
+            "battery_percentage": 60,
+            "maintainance_status": "under maintainance",
+            "rental_price": 160,
+            "vehicle_type": "ElectricScooter",
+            "extra": 90
+        },
+        {
+            "vehicle_id": "1901",
+            "model": "Lamborgini",
+            "battery_percentage": 98,
+            "maintainance_status": "available",
+            "rental_price": 1300,
+            "vehicle_type": "ElectricCar",
+            "extra": 2
+        },
+        {
+            "vehicle_id": "1903",
+            "model": "R15 V4",
+            "battery_percentage": 88,
+            "maintainance_status": "on trip",
+            "rental_price": 350,
+            "vehicle_type": "ElectricScooter",
+            "extra": 155
+        }
+    ],
+    "Mysore": [
+        {
+            "vehicle_id": "3404",
+            "model": "MG ZS EV",
+            "battery_percentage": 95,
+            "maintainance_status": "available",
+            "rental_price": 550,
+            "vehicle_type": "ElectricCar",
+            "extra": 5
+        }
+    ],
+    "Davangere": [
+        {
+            "vehicle_id": "9190",
+            "model": "Access 125",
+            "battery_percentage": 88,
+            "maintainance_status": "available",
+            "rental_price": 180,
+            "vehicle_type": "ElectricScooter",
+            "extra": 120
+        }
+    ]
+}
