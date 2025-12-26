@@ -1,0 +1,5 @@
+hub_name,vehicle_id,model,battery_percentage,maintainance_status,rental_price,vehicle_type,extra
+Bangalore,2001,Tesla Model 3,90,available,500,Car,5
+Hubli,1902,Ola S1 Pro,60,under maintainance,160,Scooter,90
+Mysore,3404,MG ZS EV,95,available,550,Car,5
+Davangere,9190,Access 125,88,available,180,Scooter,120
