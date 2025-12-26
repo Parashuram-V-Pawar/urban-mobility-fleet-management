@@ -14,7 +14,7 @@ class EcoRideMain:
   def main(self):
     while True:
       print()
-      print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Sort vehicles\n9. Exit")
+      print("Choose an option you want to perform:\n1. Add Hub\n2. Add Vehicle\n3. Display Hubs\n4. Display Vehicles\n5. Search by battery\n6. View vehicles\n7. Vehicle maintainance status\n8. Sort vehicles\n9. Sort by\n10. Exit")
       choice = int(input())
       match choice:
         case 1:
@@ -39,7 +39,10 @@ class EcoRideMain:
         case 8:
           hub_name = input("Enter hub name to sort vehicles: ")
           eco.vehicle_sorting(hub_name)
-        case 9: break
+        case 9: 
+          sort_by = input("Sort by (battery/rental price):")
+          eco.advanced_sorting(sort_by)
+        case 10: break
         case _: 
           print("Invalid choice!")
           break
@@ -158,6 +161,27 @@ class EcoRideMain:
     print("-------------------------------------------------")
     for vehicle in hub_vehicles:
         print(f"\n{vehicle}")
+
+  # Sorting dynamically by battery or rental_price
+  def advanced_sorting(self, sort_by):
+    if sort_by.lower() == "battery":
+        sorted_vehicles = sorted(
+            self.vehicles,
+            key=lambda v: v.battery_percentage,
+            reverse=True
+        )
+    elif sort_by.lower() == "rental price":
+        sorted_vehicles = sorted(
+            self.vehicles,
+            key=lambda v: v.rental_price,
+            reverse=True
+        )
+    else:
+        print("Invalid sorting option.")
+        return
+    print(f"\n\nVehicles sorted by {sort_by}:")
+    for v in sorted_vehicles:
+        print(f"\n{v}")
 
 ## Implementation of function calling and object creating
 eco = EcoRideMain()
