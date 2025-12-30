@@ -1,0 +1,7 @@
+hub_name,vehicle_id,model,battery_percentage,maintainance_status,rental_price,vehicle_type,extra
+Airport,1243,Innova,78,Available,750,Car,7
+Airport,2345,Activa,98,under maintainance,250,Scooter,110
+Airport,1245,Creta,88,under maintainance,550,Car,5
+Airport,2346,Access,65,On Trip,180,Scooter,100
+DownTown,1244,Innova,85,On Trip,770,Car,7
+DownTown,2347,Dio,76,Available,150,Scooter,90
