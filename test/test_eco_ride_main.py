@@ -190,7 +190,7 @@ def test_load_from_csv(capsys, eco):
   with pytest.raises(FileNotFoundError, match="CSV file not found. Starting with empty fleet."):
     eco.load_from_csv("abcx.csv")
   with pytest.raises(KeyError, match="Missing expected column in CSV:"):
-    eco.load_from_csv("missing_data.csv")
+    eco.load_from_csv("test_missing_data.csv")
 
 def test_load_from_json(capsys, eco):
   file_name = "test_file.json"
@@ -202,7 +202,7 @@ def test_load_from_json(capsys, eco):
   with pytest.raises(FileNotFoundError, match=f"{test_file_name} not found. Starting with empty fleet."):
     eco.load_from_json(test_file_name)
   with pytest.raises(Exception, match="Error loading JSON:"):
-    eco.load_from_json("missing_data.json")
+    eco.load_from_json("test_missing_data.json")
  
 def test_vehicle_to_dict(fleet_data, eco):
   fleet_hubs, vehicles = fleet_data
