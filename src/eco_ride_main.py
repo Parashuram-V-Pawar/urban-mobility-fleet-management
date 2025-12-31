@@ -308,11 +308,9 @@ class EcoRideMain:
       print("Fleet data loaded from CSV successfully.")
 
     except FileNotFoundError:
-      print("CSV file not found. Starting with empty fleet.")
+      raise FileNotFoundError("CSV file not found. Starting with empty fleet.")
     except KeyError as e:
-      print(f"Missing expected column in CSV: {e}")
-    except Exception as e:
-      print(f"Error loading CSV: {e}")
+      raise KeyError(f"Missing expected column in CSV: {e}")
 
   # Function to load data from JSON
   def load_from_json(self, filename: str):
@@ -351,9 +349,9 @@ class EcoRideMain:
       print(f"Fleet data loaded from {filename} successfully.")
 
     except FileNotFoundError:
-      print(f"{filename} not found. Starting with empty fleet.")
+      raise FileNotFoundError(f"{filename} not found. Starting with empty fleet.")
     except Exception as e:
-      print(f"Error loading JSON: {e}")
+      raise Exception(f"Error loading JSON: {e}")
 
   # Function to save data to JSON
   def save_to_json(self, filename: str):

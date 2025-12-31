@@ -1,4 +1,6 @@
 import pytest
+import os
+
 from eco_ride_main import EcoRideMain
 from electric_car import ElectricCar
 from electric_scooter import ElectricScooter
@@ -37,8 +39,12 @@ def fleet_data():
 
   return fleet_hub, vehicles
 
-def test_add_vehicle(monkeypatch):
+@pytest.fixture
+def eco():
   eco = EcoRideMain()
+  return eco
+
+def test_add_vehicle(monkeypatch, eco):
 
   eco.fleet_hubs["Airport"] = []
 
@@ -96,11 +102,9 @@ def test_add_vehicle(monkeypatch):
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     eco.add_vehicles()
     
-def test_view_vehicle_by_vehicle_type(fleet_data):
+def test_view_vehicle_by_vehicle_type(fleet_data, eco):
 
   fleet_hubs, vehicles = fleet_data
-
-  eco = EcoRideMain()
 
   eco.vehicles = vehicles
 
@@ -109,10 +113,8 @@ def test_view_vehicle_by_vehicle_type(fleet_data):
   assert len(eco.vehicle_category["Cars"]) == 3
   assert len(eco.vehicle_category["Scooters"]) == 3
 
-def test_vehicle_maintainance_status(capsys, fleet_data):
+def test_vehicle_maintainance_status(capsys, fleet_data, eco):
   fleet_hubs, vehicles = fleet_data
-
-  eco = EcoRideMain()
 
   eco.vehicles = vehicles
   eco.vehicle_maintainance_status()
@@ -121,10 +123,8 @@ def test_vehicle_maintainance_status(capsys, fleet_data):
 
   assert str("\n\nMaintainance Status: \n------------------------------------------------\nAvailable: 2\nOn trip: 2\nUnder Maintainance: 2\n") in output
   
-def test_vehicle_sorting(capsys, fleet_data):
+def test_vehicle_sorting(capsys, fleet_data, eco):
     fleet_hubs, vehicles = fleet_data
-    
-    eco = EcoRideMain()
 
     eco.vehicles = vehicles
 
@@ -147,9 +147,8 @@ def test_vehicle_sorting(capsys, fleet_data):
     assert "Dio" in captured.out
     assert "Innova" in captured.out
 
-def test_advanced_sorting_by_battery(capsys, fleet_data):
+def test_advanced_sorting_by_battery(capsys, fleet_data, eco):
     fleet_hubs, vehicles = fleet_data
-    eco = EcoRideMain()
     
     eco.vehicles = vehicles
 
@@ -159,40 +158,54 @@ def test_advanced_sorting_by_battery(capsys, fleet_data):
 
     assert "\n\nVehicles sorted by battery:\n\nActiva\n\nCreta\n\nInnova\n\nInnova\n\nDio\n\nAccess\n" in captured
 
-def test_save_to_csv(capsys, fleet_data):
+def test_save_to_csv(capsys, fleet_data, eco):
 
   fleet_hubs, vehicles = fleet_data
-  eco = EcoRideMain()
   eco.fleet_hubs = fleet_hubs
   eco.vehicles = vehicles
 
-  eco.save_to_csv("test_file.csv")
+  file_name = "test_file.csv"
+  eco.save_to_csv(file_name)
+  assert os.path.exists(file_name)
   output = capsys.readouterr()
-
   assert "Fleet data saved to CSV successfully.\n" in output
 
-def test_save_to_json(capsys, fleet_data):
+def test_save_to_json(capsys, fleet_data, eco):
   fleet_hubs, vehicles = fleet_data
-  eco = EcoRideMain()
   eco.fleet_hubs = fleet_hubs
   eco.vehicles = vehicles
 
-  eco.save_to_json("test_file.json")
+  file_name = "test_file.json"
+  eco.save_to_json(file_name)
   output = capsys.readouterr()
-
+  assert os.path.exists(file_name)
   assert "Fleet data saved to JSON successfully.\n" in output
 
-def test_load_from_csv(capsys):
-  eco = EcoRideMain()
-
-  eco.load_from_csv("test_file.csv")
+def test_load_from_csv(capsys, eco):
+  file_name = "test_file.csv"
+  eco.load_from_csv(file_name)
   output = capsys.readouterr()
-
   assert "Fleet data loaded from CSV successfully.\n" in output
 
-def test_vehicle_to_dict(fleet_data):
+  with pytest.raises(FileNotFoundError, match="CSV file not found. Starting with empty fleet."):
+    eco.load_from_csv("abcx.csv")
+  with pytest.raises(KeyError, match="Missing expected column in CSV:"):
+    eco.load_from_csv("missing_data.csv")
+
+def test_load_from_json(capsys, eco):
+  file_name = "test_file.json"
+  eco.load_from_json(file_name)
+  output = capsys.readouterr()
+  assert f"Fleet data loaded from {file_name} successfully.\n" in output
+
+  test_file_name = "abcx.json"
+  with pytest.raises(FileNotFoundError, match=f"{test_file_name} not found. Starting with empty fleet."):
+    eco.load_from_json(test_file_name)
+  with pytest.raises(Exception, match="Error loading JSON:"):
+    eco.load_from_json("missing_data.json")
+ 
+def test_vehicle_to_dict(fleet_data, eco):
   fleet_hubs, vehicles = fleet_data
-  eco = EcoRideMain()
   eco.vehicles = vehicles
 
   vehicle_dicts = [eco.vehicle_to_dict(vehicle) for vehicle in eco.vehicles]
@@ -216,4 +229,3 @@ def test_vehicle_to_dict(fleet_data):
     "extra": 110,
     'vehicle_type': 'ElectricScooter'
   }
-  

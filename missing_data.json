@@ -1,0 +1,55 @@
+{
+    "Airport": [
+        {
+            "model": "Innova",
+            "battery_percentage": 78,
+            "maintainance_status": "Available",
+            "rental_price": 750,
+            "vehicle_type": "ElectricCar",
+            "extra": 7
+        },
+        {
+            "vehicle_id": "2345",
+            "battery_percentage": 98,
+            "maintainance_status": "under maintainance",
+            "rental_price": 250,
+            "vehicle_type": "ElectricScooter",
+            "extra": 110
+        },
+        {
+            "vehicle_id": "1245",
+            "model": "Creta",
+            "battery_percentage": 88,
+            "maintainance_status": "under maintainance",
+            "vehicle_type": "ElectricCar",
+            "extra": 5
+        },
+        {
+            "vehicle_id": "2346",
+            "model": "Access",
+            "battery_percentage": 65,
+            "maintainance_status": "On Trip",
+            "rental_price": 180,
+            "vehicle_type": "ElectricScooter",
+            "extra": 100
+        }
+    ],
+    "DownTown": [
+        {
+            "vehicle_id": "1244",
+            "model": "Innova",
+            "battery_percentage": 85,
+            "maintainance_status": "On Trip",
+            "rental_price": 770,
+            "vehicle_type": "ElectricCar"
+        },
+        {
+            "vehicle_id": "2347",
+            "model": "Dio",
+            "battery_percentage": 76,
+            "maintainance_status": "Available",
+            "rental_price": 150,
+            "extra": 90
+        }
+    ]
+}
