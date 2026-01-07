@@ -13,9 +13,11 @@ It is a system to manage fleets, vehicles and monitor vehicle maintainance statu
 8. Retrieving information from CSV and JSON files.
 
 ## Tech stack
+```
 -- Language: Python
 -- Tools: VSCode, Git
 -- Testing: Pytest
+```
 
 ## Project structure
 ```
