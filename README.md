@@ -18,6 +18,7 @@ It is a system to manage fleets, vehicles and monitor vehicle maintainance statu
 -- Testing: Pytest
 
 ## Project structure
+```
 Urban-mobility-fleet-management
 |-- src
 |   |-- main.py
@@ -38,6 +39,7 @@ Urban-mobility-fleet-management
 |-- .gitignore
 |-- README.md
 |-- requirements.txt
+```
 
 ## Installation
 
@@ -55,5 +57,7 @@ Run the application
 
 
 ## Author
+```
 Parashuram V Pawar
 GitHub username: Parashuram-V-Pawar
+```
