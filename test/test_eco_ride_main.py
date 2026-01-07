@@ -84,8 +84,6 @@ def test_add_vehicle(monkeypatch, eco):
   assert eco.vehicles[1].maintainance_status == "On Trip"
   assert eco.vehicles[1].rental_price == 340
   assert eco.vehicles[1].max_speed_limit == 110
-
-
 # Invalid inouts
   with pytest.raises(ValueError, match="Vehicle type must be car or scooter"):
     inputs = iter([
