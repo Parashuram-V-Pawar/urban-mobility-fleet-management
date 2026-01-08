@@ -29,6 +29,10 @@ Urban-mobility-fleet-management/
 |   |-- electric_car.py
 |   |-- electric_scooter.py
 |
+|-- data/
+|   |-- fleet_data.csv
+|   |-- fleet_data.json
+|
 |-- test/
 |   |-- test_eco_ride_main.py
 |   |-- test_electric_car.py
@@ -38,10 +42,6 @@ Urban-mobility-fleet-management/
 |       |-- test_file.json
 |       |-- test_missing_data.csv
 |       |-- text_missing_data.json
-|
-|-- data/
-|   |-- fleet_data.csv
-|   |-- fleet_data.json
 |
 |-- .gitignore
 |-- README.md
