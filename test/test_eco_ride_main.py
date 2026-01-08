@@ -162,7 +162,7 @@ def test_save_to_csv(capsys, fleet_data, eco):
   eco.fleet_hubs = fleet_hubs
   eco.vehicles = vehicles
 
-  file_name = "test/test_file.csv"
+  file_name = "test/test-data/test_file.csv"
   eco.save_to_csv(file_name)
   assert os.path.exists(file_name)
   output = capsys.readouterr()
@@ -173,14 +173,14 @@ def test_save_to_json(capsys, fleet_data, eco):
   eco.fleet_hubs = fleet_hubs
   eco.vehicles = vehicles
 
-  file_name = "test/test_file.json"
+  file_name = "test/test-data/test_file.json"
   eco.save_to_json(file_name)
   output = capsys.readouterr()
   assert os.path.exists(file_name)
   assert "Fleet data saved to JSON successfully.\n" in output
 
 def test_load_from_csv(capsys, eco):
-  file_name = "test/test_file.csv"
+  file_name = "test/test-data/test_file.csv"
   eco.load_from_csv(file_name)
   output = capsys.readouterr()
   assert "Fleet data loaded from CSV successfully.\n" in output
@@ -188,10 +188,10 @@ def test_load_from_csv(capsys, eco):
   with pytest.raises(FileNotFoundError, match="CSV file not found. Starting with empty fleet."):
     eco.load_from_csv("abcx.csv")
   with pytest.raises(KeyError, match="Missing expected column in CSV:"):
-    eco.load_from_csv("test/test_missing_data.csv")
+    eco.load_from_csv("test/test-data/test_missing_data.csv")
 
 def test_load_from_json(capsys, eco):
-  file_name = "test/test_file.json"
+  file_name = "test/test-data/test_file.json"
   eco.load_from_json(file_name)
   output = capsys.readouterr()
   assert f"Fleet data loaded from {file_name} successfully.\n" in output
@@ -200,7 +200,7 @@ def test_load_from_json(capsys, eco):
   with pytest.raises(FileNotFoundError, match=f"{test_file_name} not found. Starting with empty fleet."):
     eco.load_from_json(test_file_name)
   with pytest.raises(Exception, match="Error loading JSON:"):
-    eco.load_from_json("test/test_missing_data.json")
+    eco.load_from_json("test/test-data/test_missing_data.json")
  
 def test_vehicle_to_dict(fleet_data, eco):
   fleet_hubs, vehicles = fleet_data

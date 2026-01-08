@@ -21,20 +21,25 @@ It is a system to manage fleets, vehicles and monitor vehicle maintainance statu
 
 ## Project structure
 ```
-Urban-mobility-fleet-management
-|-- src
+Urban-mobility-fleet-management/
+|-- src/
 |   |-- main.py
 |   |-- eco_ride_main.py
 |   |-- vehicle.py
 |   |-- electric_car.py
 |   |-- electric_scooter.py
 |
-|-- test
+|-- test/
 |   |-- test_eco_ride_main.py
 |   |-- test_electric_car.py
 |   |-- test_electric_scooter.py
+|   |-- test-data/
+|       |-- test_file.csv
+|       |-- test_file.json
+|       |-- test_missing_data.csv
+|       |-- text_missing_data.json
 |
-|-- data
+|-- data/
 |   |-- fleet_data.csv
 |   |-- fleet_data.json
 |
