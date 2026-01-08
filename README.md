@@ -49,7 +49,7 @@ Urban-mobility-fleet-management/
 ```
 
 ## Installation
-
+```
 Clone the repository
 -> git clone https://github.com/Parashuram-V-Pawar/urban-mobility-fleet-management.git
 
@@ -61,7 +61,7 @@ Install dependencies
 
 Run the application
 -> python main.py
-
+```
 
 ## Author
 ```
